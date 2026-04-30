@@ -21,11 +21,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller pynput
 
-      - name: Build EXE
-        run: pyinstaller --onefile --name MouseToggle mouse_toggle.py
+      - name: Build Console EXE
+        run: pyinstaller --onefile --name MouseToggle-Console mouse_toggle.py
 
-      - name: Upload artifact
+      - name: Build GUI EXE
+        run: pyinstaller --onefile --noconsole --name MouseToggle-GUI mouse_toggle_gui.py
+
+      - name: Upload Console artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MouseToggle-Windows
-          path: dist/MouseToggle.exe
+          name: MouseToggle-Console
+          path: dist/MouseToggle-Console.exe
+
+      - name: Upload GUI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MouseToggle-GUI
+          path: dist/MouseToggle-GUI.exe
